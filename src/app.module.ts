@@ -9,7 +9,7 @@ import { MdlModule } from './mdl/mdl.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env-prod' }),
     CacheModule.register({
       max: 30000,
       ttl: 0,
@@ -26,7 +26,9 @@ import { MdlModule } from './mdl/mdl.module';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true,
+        retryAttempts: 20,
+        retryDelay: 3000,
+        keepConnectionAlive: true,
       }),
     }),
     OrganisationUnitsModule,
