@@ -1,35 +1,18 @@
+version: '3.8'
 services:
   app:
-    build: .
-    environment:
-      DATABASE_HOST: localhost  # MUST be localhost on Cloud Run
-      DATABASE_PORT: 3306      # Use the internal MySQL port
-      DATABASE_USER: ${DB_USERNAME}
-      DATABASE_PASSWORD: ${DB_PASSWORD}
-      DATABASE_NAME: ${DB_NAME}
-    depends_on:
-      db:
-        condition: service_healthy # Wait for DB to be ready
+    build:
+      context: .
+      dockerfile: dockerfile
     ports:
-      - "8080:8080"
-
-  db:
-    image: mysql:8.0
+      - '8080:8080'
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 20s
-      retries: 10
-    volumes:
-      - mysql-data:/var/lib/mysql 
-    ports:
-      - "3306:3306"
-    # Use Cloud Run specific volume mount or remove for pure POC
-volumes:
-  mysql-data:
-    driver: local
-    driver_opts:
-      type: tmpfs  # Creates an in-memory volume for Cloud Run
-      device: tmpfs
+      DB_HOST: ${DB_HOST} # MUST be localhost on Cloud Run
+      DB_PORT: ${DB_PORT} # Use the internal MySQL port
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+      MOODLE_URL_API: ${MOODLE_URL_API}
+      MOODLE_API_TOKEN: ${MOODLE_API_TOKEN}
+      NODE_TLS_REJECT_UNAUTHORIZED: ${NODE_TLS_REJECT_UNAUTHORIZED}
+      DATABASE_URL: ${DATABASE_URL} # Optional, if you want to use a single connection string
