@@ -32,6 +32,13 @@ import { MdlModule } from './mdl/mdl.module';
         ssl: {
           rejectUnauthorized: false,
         },
+        pool: {
+          max: 15,
+          min: 2,
+          acquire: 30000,
+          idle: 10000,
+        },
+        synchronize: false,
       }),
     }),
     OrganisationUnitsModule,
