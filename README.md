@@ -23,7 +23,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This NestJS app serves as an API bridge, making a secured data flow from Angular, TiDB and Moodle Cloud. TiDB contains the metadata, preprocessed from DHIS2 metadata via an external ETL.
 
 ## Project setup
 
