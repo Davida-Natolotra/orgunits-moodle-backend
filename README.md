@@ -24,8 +24,9 @@
 ## Description
 
 This NestJS app serves as an API bridge, making a secured data flow from Angular, TiDB and Moodle Cloud. TiDB contains the metadata, preprocessed from DHIS2 metadata via an external ETL.
+You can try this app, by going to the link <a href="https://dave-teck.web.app/" target="_blank">https://dave-teck.web.app/</a> with the email addresse tibo-rakoto@gmail.fr.
 
-## Project setup
+## Project setup 
 
 ```bash
 $ npm install
